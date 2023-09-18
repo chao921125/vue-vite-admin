@@ -1,7 +1,7 @@
 import Reg from "./reg";
 export const verifyNumber = (val: string): boolean => {
-	val = val.trim();
-	return Reg.number.test(val);
+  val = val.trim();
+  return Reg.number.test(val);
 };
 /**
  * 验证百分比（不可以小数）
@@ -9,16 +9,16 @@ export const verifyNumber = (val: string): boolean => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberPercentage = (val: string): string => {
-	// 匹配空格
-	let v = val.replace(/(^\s*)|(\s*$)/g, "");
-	// 只能是数字和小数点，不能是其他输入
-	v = v.replace(/[^\d]/g, "");
-	// 不能以0开始
-	v = v.replace(/^0/g, "");
-	// 数字超过100，赋值成最大值100
-	v = v.replace(/^[1-9]\d\d{1,3}$/, "100");
-	// 返回结果
-	return v;
+  // 匹配空格
+  let v = val.replace(/(^\s*)|(\s*$)/g, "");
+  // 只能是数字和小数点，不能是其他输入
+  v = v.replace(/[^\d]/g, "");
+  // 不能以0开始
+  v = v.replace(/^0/g, "");
+  // 数字超过100，赋值成最大值100
+  v = v.replace(/^[1-9]\d\d{1,3}$/, "100");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -27,13 +27,13 @@ export const verifyNumberPercentage = (val: string): string => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberPercentageFloat = (val: string): string => {
-	let v = verifyNumberIntegerAndFloat(val);
-	// 数字超过100，赋值成最大值100
-	v = v.replace(/^[1-9]\d\d{1,3}$/, "100");
-	// 超过100之后不给再输入值
-	v = v.replace(/^100\.$/, "100");
-	// 返回结果
-	return v;
+  let v = verifyNumberIntegerAndFloat(val);
+  // 数字超过100，赋值成最大值100
+  v = v.replace(/^[1-9]\d\d{1,3}$/, "100");
+  // 超过100之后不给再输入值
+  v = v.replace(/^100\.$/, "100");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -42,20 +42,20 @@ export const verifyNumberPercentageFloat = (val: string): string => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberIntegerAndFloat = (val: string) => {
-	// 匹配空格
-	let v = val.replace(/(^\s*)|(\s*$)/g, "");
-	// 只能是数字和小数点，不能是其他输入
-	v = v.replace(/[^\d.]/g, "");
-	// 以0开始只能输入一个
-	v = v.replace(/^0{2}$/g, "0");
-	// 保证第一位只能是数字，不能是点
-	v = v.replace(/^\./g, "");
-	// 小数只能出现1位
-	v = v.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-	// 小数点后面保留2位
-	v = v.replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3");
-	// 返回结果
-	return v;
+  // 匹配空格
+  let v = val.replace(/(^\s*)|(\s*$)/g, "");
+  // 只能是数字和小数点，不能是其他输入
+  v = v.replace(/[^\d.]/g, "");
+  // 以0开始只能输入一个
+  v = v.replace(/^0{2}$/g, "0");
+  // 保证第一位只能是数字，不能是点
+  v = v.replace(/^\./g, "");
+  // 小数只能出现1位
+  v = v.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+  // 小数点后面保留2位
+  v = v.replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -64,18 +64,18 @@ export const verifyNumberIntegerAndFloat = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberInteger = (val: string) => {
-	// 匹配空格
-	let v = val.replace(/(^\s*)|(\s*$)/g, "");
-	// 去掉 '.' , 防止贴贴的时候出现问题 如 0.1.12.12
-	v = v.replace(/[\.]*/g, "");
-	// 去掉以 0 开始后面的数, 防止贴贴的时候出现问题 如 00121323
-	v = v.replace(/(^0[\d]*)$/g, "0");
-	// 首位是0,只能出现一次
-	v = v.replace(/^0\d$/g, "0");
-	// 只匹配数字
-	v = v.replace(/[^\d]/g, "");
-	// 返回结果
-	return v;
+  // 匹配空格
+  let v = val.replace(/(^\s*)|(\s*$)/g, "");
+  // 去掉 '.' , 防止贴贴的时候出现问题 如 0.1.12.12
+  v = v.replace(/[\.]*/g, "");
+  // 去掉以 0 开始后面的数, 防止贴贴的时候出现问题 如 00121323
+  v = v.replace(/(^0[\d]*)$/g, "0");
+  // 首位是0,只能出现一次
+  v = v.replace(/^0\d$/g, "0");
+  // 只匹配数字
+  v = v.replace(/[^\d]/g, "");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -84,12 +84,12 @@ export const verifyNumberInteger = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyCnAndSpace = (val: string) => {
-	// 匹配中文与空格
-	let v = val.replace(/[\u4e00-\u9fa5\s]+/g, "");
-	// 匹配空格
-	v = v.replace(/(^\s*)|(\s*$)/g, "");
-	// 返回结果
-	return v;
+  // 匹配中文与空格
+  let v = val.replace(/[\u4e00-\u9fa5\s]+/g, "");
+  // 匹配空格
+  v = v.replace(/(^\s*)|(\s*$)/g, "");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -98,12 +98,12 @@ export const verifyCnAndSpace = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyEnAndSpace = (val: string) => {
-	// 匹配英文与空格
-	let v = val.replace(/[a-zA-Z]+/g, "");
-	// 匹配空格
-	v = v.replace(/(^\s*)|(\s*$)/g, "");
-	// 返回结果
-	return v;
+  // 匹配英文与空格
+  let v = val.replace(/[a-zA-Z]+/g, "");
+  // 匹配空格
+  v = v.replace(/(^\s*)|(\s*$)/g, "");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -112,10 +112,10 @@ export const verifyEnAndSpace = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyAndSpace = (val: string) => {
-	// 匹配空格
-	let v = val.replace(/(^\s*)|(\s*$)/g, "");
-	// 返回结果
-	return v;
+  // 匹配空格
+  let v = val.replace(/(^\s*)|(\s*$)/g, "");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -124,16 +124,16 @@ export const verifyAndSpace = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberComma = (val: string) => {
-	// 调用小数或整数(不可以负数)方法
-	let v: any = verifyNumberIntegerAndFloat(val);
-	// 字符串转成数组
-	v = v.toString().split(".");
-	// \B 匹配非单词边界，两边都是单词字符或者两边都是非单词字符
-	v[0] = v[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	// 数组转字符串
-	v = v.join(".");
-	// 返回结果
-	return v;
+  // 调用小数或整数(不可以负数)方法
+  let v: any = verifyNumberIntegerAndFloat(val);
+  // 字符串转成数组
+  v = v.toString().split(".");
+  // \B 匹配非单词边界，两边都是单词字符或者两边都是非单词字符
+  v[0] = v[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // 数组转字符串
+  v = v.join(".");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -144,10 +144,10 @@ export const verifyNumberComma = (val: string) => {
  * @returns 返回处理后的字符串
  */
 export const verifyTextColor = (val: string, text = "", color = "red") => {
-	// 返回内容，添加颜色
-	let v = text.replace(new RegExp(val, "gi"), `<span style='color: ${color}'>${val}</span>`);
-	// 返回结果
-	return v;
+  // 返回内容，添加颜色
+  let v = text.replace(new RegExp(val, "gi"), `<span style='color: ${color}'>${val}</span>`);
+  // 返回结果
+  return v;
 };
 
 /**
@@ -157,29 +157,29 @@ export const verifyTextColor = (val: string, text = "", color = "red") => {
  * @returns 返回处理后的字符串
  */
 export const verifyNumberCnUppercase = (val: any, unit = "仟佰拾亿仟佰拾万仟佰拾元角分", v = "") => {
-	// 当前内容字符串添加 2个0，为什么??
-	val += "00";
-	// 返回某个指定的字符串值在字符串中首次出现的位置，没有出现，则该方法返回 -1
-	let lookup = val.indexOf(".");
-	// substring：不包含结束下标内容，substr：包含结束下标内容
-	if (lookup >= 0) val = val.substring(0, lookup) + val.substr(lookup + 1, 2);
-	// 根据内容 val 的长度，截取返回对应大写
-	unit = unit.substr(unit.length - val.length);
-	// 循环截取拼接大写
-	for (let i = 0; i < val.length; i++) {
-		v += "零壹贰叁肆伍陆柒捌玖".substr(val.substr(i, 1), 1) + unit.substr(i, 1);
-	}
-	// 正则处理
-	v = v
-		.replace(/零角零分$/, "整")
-		.replace(/零[仟佰拾]/g, "零")
-		.replace(/零{2,}/g, "零")
-		.replace(/零([亿|万])/g, "$1")
-		.replace(/零+元/, "元")
-		.replace(/亿零{0,3}万/, "亿")
-		.replace(/^元/, "零元");
-	// 返回结果
-	return v;
+  // 当前内容字符串添加 2个0，为什么??
+  val += "00";
+  // 返回某个指定的字符串值在字符串中首次出现的位置，没有出现，则该方法返回 -1
+  let lookup = val.indexOf(".");
+  // substring：不包含结束下标内容，substr：包含结束下标内容
+  if (lookup >= 0) val = val.substring(0, lookup) + val.substr(lookup + 1, 2);
+  // 根据内容 val 的长度，截取返回对应大写
+  unit = unit.substr(unit.length - val.length);
+  // 循环截取拼接大写
+  for (let i = 0; i < val.length; i++) {
+    v += "零壹贰叁肆伍陆柒捌玖".substr(val.substr(i, 1), 1) + unit.substr(i, 1);
+  }
+  // 正则处理
+  v = v
+    .replace(/零角零分$/, "整")
+    .replace(/零[仟佰拾]/g, "零")
+    .replace(/零{2,}/g, "零")
+    .replace(/零([亿|万])/g, "$1")
+    .replace(/零+元/, "元")
+    .replace(/亿零{0,3}万/, "亿")
+    .replace(/^元/, "零元");
+  // 返回结果
+  return v;
 };
 
 /**
@@ -188,10 +188,10 @@ export const verifyNumberCnUppercase = (val: any, unit = "仟佰拾亿仟佰拾�
  * @returns 返回 true: 手机号码正确
  */
 export const verifyPhone = (val: string) => {
-	// false: 手机号码不正确
-	if (!/^((12[0-9])|(13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0|1,5-9]))\d{8}$/.test(val)) return false;
-	// true: 手机号码正确
-	else return true;
+  // false: 手机号码不正确
+  if (!/^((12[0-9])|(13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0|1,5-9]))\d{8}$/.test(val)) return false;
+  // true: 手机号码正确
+  else return true;
 };
 
 /**
@@ -200,10 +200,10 @@ export const verifyPhone = (val: string) => {
  * @returns 返回 true: 国内电话号码正确
  */
 export const verifyTelPhone = (val: string) => {
-	// false: 国内电话号码不正确
-	if (!/\d{3}-\d{8}|\d{4}-\d{7}/.test(val)) return false;
-	// true: 国内电话号码正确
-	else return true;
+  // false: 国内电话号码不正确
+  if (!/\d{3}-\d{8}|\d{4}-\d{7}/.test(val)) return false;
+  // true: 国内电话号码正确
+  else return true;
 };
 
 /**
@@ -212,10 +212,10 @@ export const verifyTelPhone = (val: string) => {
  * @returns 返回 true: 登录账号正确
  */
 export const verifyAccount = (val: string) => {
-	// false: 登录账号不正确
-	if (!/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/.test(val)) return false;
-	// true: 登录账号正确
-	else return true;
+  // false: 登录账号不正确
+  if (!/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/.test(val)) return false;
+  // true: 登录账号正确
+  else return true;
 };
 
 /**
@@ -224,10 +224,10 @@ export const verifyAccount = (val: string) => {
  * @returns 返回 true: 密码正确
  */
 export const verifyPassword = (val: string) => {
-	// false: 密码不正确
-	if (!/^[a-zA-Z]\w{5,15}$/.test(val)) return false;
-	// true: 密码正确
-	else return true;
+  // false: 密码不正确
+  if (!/^[a-zA-Z]\w{5,15}$/.test(val)) return false;
+  // true: 密码正确
+  else return true;
 };
 
 /**
@@ -236,11 +236,11 @@ export const verifyPassword = (val: string) => {
  * @returns 返回 true: 强密码正确
  */
 export const verifyPasswordPowerful = (val: string) => {
-	// false: 强密码不正确
-	if (!/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&\.*]+$)(?![\d!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val))
-		return false;
-	// true: 强密码正确
-	else return true;
+  // false: 强密码不正确
+  if (!/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&\.*]+$)(?![\d!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val))
+    return false;
+  // true: 强密码正确
+  else return true;
 };
 
 /**
@@ -252,15 +252,15 @@ export const verifyPasswordPowerful = (val: string) => {
  * @returns 返回处理后的字符串：弱、中、强
  */
 export const verifyPasswordStrength = (val: string) => {
-	let v = "";
-	// 弱：纯数字，纯字母，纯特殊字符
-	if (/^(?:\d+|[a-zA-Z]+|[!@#$%^&\.*]+){6,16}$/.test(val)) v = "弱";
-	// 中：字母+数字，字母+特殊字符，数字+特殊字符
-	if (/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val)) v = "中";
-	// 强：字母+数字+特殊字符
-	if (/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&\.*]+$)(?![\d!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val)) v = "强";
-	// 返回结果
-	return v;
+  let v = "";
+  // 弱：纯数字，纯字母，纯特殊字符
+  if (/^(?:\d+|[a-zA-Z]+|[!@#$%^&\.*]+){6,16}$/.test(val)) v = "弱";
+  // 中：字母+数字，字母+特殊字符，数字+特殊字符
+  if (/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val)) v = "中";
+  // 强：字母+数字+特殊字符
+  if (/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&\.*]+$)(?![a-zA-z\d]+$)(?![a-zA-z!@#$%^&\.*]+$)(?![\d!@#$%^&\.*]+$)[a-zA-Z\d!@#$%^&\.*]{6,16}$/.test(val)) v = "强";
+  // 返回结果
+  return v;
 };
 
 /**
@@ -269,11 +269,11 @@ export const verifyPasswordStrength = (val: string) => {
  * @returns 返回 true: IP地址正确
  */
 export const verifyIPAddress = (val: string) => {
-	// false: IP地址不正确
-	if (!/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/.test(val))
-		return false;
-	// true: IP地址正确
-	else return true;
+  // false: IP地址不正确
+  if (!/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/.test(val))
+    return false;
+  // true: IP地址正确
+  else return true;
 };
 
 /**
@@ -282,15 +282,15 @@ export const verifyIPAddress = (val: string) => {
  * @returns 返回 true: 邮箱正确
  */
 export const verifyEmail = (val: string) => {
-	// false: 邮箱不正确
-	if (
-		!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-			val,
-		)
-	)
-		return false;
-	// true: 邮箱正确
-	else return true;
+  // false: 邮箱不正确
+  if (
+    !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      val,
+    )
+  )
+    return false;
+  // true: 邮箱正确
+  else return true;
 };
 
 /**
@@ -299,10 +299,10 @@ export const verifyEmail = (val: string) => {
  * @returns 返回 true: 身份证正确
  */
 export const verifyIdCard = (val: string) => {
-	// false: 身份证不正确
-	if (!/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(val)) return false;
-	// true: 身份证正确
-	else return true;
+  // false: 身份证不正确
+  if (!/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(val)) return false;
+  // true: 身份证正确
+  else return true;
 };
 
 /**
@@ -311,10 +311,10 @@ export const verifyIdCard = (val: string) => {
  * @returns 返回 true: 姓名正确
  */
 export const verifyFullName = (val: string) => {
-	// false: 姓名不正确
-	if (!/^[\u4e00-\u9fa5]{1,6}(·[\u4e00-\u9fa5]{1,6}){0,2}$/.test(val)) return false;
-	// true: 姓名正确
-	else return true;
+  // false: 姓名不正确
+  if (!/^[\u4e00-\u9fa5]{1,6}(·[\u4e00-\u9fa5]{1,6}){0,2}$/.test(val)) return false;
+  // true: 姓名正确
+  else return true;
 };
 
 /**
@@ -323,10 +323,10 @@ export const verifyFullName = (val: string) => {
  * @returns 返回 true: 邮政编码正确
  */
 export const verifyPostalCode = (val: string) => {
-	// false: 邮政编码不正确
-	if (!/^[1-9][0-9]{5}$/.test(val)) return false;
-	// true: 邮政编码正确
-	else return true;
+  // false: 邮政编码不正确
+  if (!/^[1-9][0-9]{5}$/.test(val)) return false;
+  // true: 邮政编码正确
+  else return true;
 };
 
 /**
@@ -335,15 +335,10 @@ export const verifyPostalCode = (val: string) => {
  * @returns 返回 true: url 正确
  */
 export const verifyUrl = (val: string) => {
-	// false: url不正确
-	if (
-		!/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
-			val,
-		)
-	)
-		return false;
-	// true: url正确
-	else return true;
+  // false: url不正确
+  if (!/^((https|http|ftp|ws|wss):?\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/i.test(val)) return false;
+  // true: url正确
+  else return true;
 };
 
 /**
@@ -352,13 +347,13 @@ export const verifyUrl = (val: string) => {
  * @returns 返回 true：车牌号正确
  */
 export const verifyCarNum = (val: string) => {
-	// false: 车牌号不正确
-	if (
-		!/^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$/.test(
-			val,
-		)
-	)
-		return false;
-	// true：车牌号正确
-	else return true;
+  // false: 车牌号不正确
+  if (
+    !/^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$/.test(
+      val,
+    )
+  )
+    return false;
+  // true：车牌号正确
+  else return true;
 };
